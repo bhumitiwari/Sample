@@ -149,12 +149,13 @@ export const ChaptersMobileUI: React.FC = () => {
         darkMode ? "bg-[#222E3F] text-[#FFFFFF]" : "bg-[#FFFFFF] text-[#101319]"
       }`}
     >
-      <div className="fixed top-0 left-0 right-0 z-10 bg-inherit p-4 pb-2">
-        <div className="relative flex items-center justify-center">
+      <div className="fixed top-0 left-0 right-0 z-10 bg-inherit px-4 pt-4 pb-2 w-full">
+      
+        <div className="relative flex items-center justify-center w-full">
           <div
-            className={`text-[16px] font-bold ${
+            className={`text-base font-bold text-center ${
               darkMode ? "text-[#FFFFFF]" : "text-[#101319]"
-            }`}
+            } w-full`}
           >
             JEE Main
           </div>
@@ -172,11 +173,11 @@ export const ChaptersMobileUI: React.FC = () => {
         </div>
 
         <div
-          className={`border-b mt-3 ${
+          className={`mt-3 border-b w-full overflow-x-auto scrollbar-hide ${
             darkMode ? "border-[#3E5574]" : "border-[#D1D8E0]"
           }`}
         >
-          <div className="flex justify-around">
+          <div className="flex justify-between min-w-[320px] w-full">
             {[
               {
                 label: "Phy",
@@ -227,7 +228,7 @@ export const ChaptersMobileUI: React.FC = () => {
                 <button
                   key={value}
                   onClick={() => handleSubjectChange(value)}
-                  className={`relative flex flex-col items-center pt-5 pb-3 text-sm font-semibold transition ${
+                  className={`flex-1 flex flex-col items-center pt-4 pb-2 text-sm font-semibold transition ${
                     isActive ? activeColor : inactiveColor
                   }`}
                 >
@@ -237,7 +238,7 @@ export const ChaptersMobileUI: React.FC = () => {
                   </span>
                   {isActive && (
                     <span
-                      className={`absolute -bottom-0.5 h-0.5 w-10 rounded-full ${
+                      className={`mt-1 h-0.5 w-10 rounded-full ${
                         darkMode ? "bg-[#6FBBFC]" : "bg-[#0065DE]"
                       }`}
                     />
