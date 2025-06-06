@@ -93,12 +93,13 @@ export const ChapterCardMobile: React.FC<ChapterCardProps> = ({
       className={`p-4 hover:shadow-sm cursor-pointer transition-colors ${cardBg} flex flex-col gap-2 border-none`}
     >
       <div className="flex items-center justify-between w-full">
-        <div className="flex items-center gap-4">
-          <Icon size={24} className="text-orange-500" />
-          <span className="font-medium text-[16px] leading-[1.2] truncate max-w-[180px]">
+        <div className="flex items-center gap-4 min-w-0 flex-1">
+          <Icon size={24} className="text-orange-500 shrink-0" />
+          <span className="truncate font-medium text-[16px] leading-[1.2]">
             {title}
           </span>
         </div>
+
         <span className={`text-[12px] leading-none ${textMuted}`}>
           {chapter.questionSolved}/{totalQuestions} Qs
         </span>
