@@ -7,7 +7,7 @@ import { ChaptersMobileUI } from "@/components/mobile/chapters-mobile-ui";
 import { useMediaQuery } from "usehooks-ts";
 
 export default function Home() {
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery("(max-width: 820px)");
 
   return (
     <Provider store={store}>
