@@ -95,7 +95,7 @@ export const ChapterCardMobile: React.FC<ChapterCardProps> = ({
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center gap-4">
           <Icon size={24} className="text-orange-500" />
-          <span className="font-medium text-[16px] leading-[1.2] truncate">
+          <span className="font-medium text-[16px] leading-[1.2] truncate max-w-[180px]">
             {title}
           </span>
         </div>
@@ -121,7 +121,6 @@ export const ChapterCardMobile: React.FC<ChapterCardProps> = ({
         </span>
       </div>
 
-      
       <div className="mt-2">
         {isEditing ? (
           <div className="flex flex-col gap-2">
