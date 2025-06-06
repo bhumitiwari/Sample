@@ -150,7 +150,6 @@ export const ChaptersMobileUI: React.FC = () => {
       }`}
     >
       <div className="fixed top-0 left-0 right-0 z-10 bg-inherit px-4 pt-4 pb-2 w-full">
-      
         <div className="relative flex items-center justify-center w-full">
           <div
             className={`text-base font-bold text-center ${
@@ -223,26 +222,22 @@ export const ChaptersMobileUI: React.FC = () => {
               const inactiveColor = darkMode
                 ? "text-[#B9BFD0]"
                 : "text-[#505D79]";
+              const activeBorder = darkMode
+                ? "border-[#6FBBFC]"
+                : "border-[#0065DE]";
 
               return (
                 <button
                   key={value}
                   onClick={() => handleSubjectChange(value)}
-                  className={`flex-1 flex flex-col items-center pt-4 pb-2 text-sm font-semibold transition ${
-                    isActive ? activeColor : inactiveColor
+                  className={`flex-1 flex flex-col items-center pt-4 pb-2 text-sm font-semibold border-b-2 ${
+                    isActive
+                      ? `${activeColor} ${activeBorder}`
+                      : `${inactiveColor} border-transparent`
                   }`}
                 >
                   <div className="mb-1">{icon}</div>
-                  <span className={isActive ? "font-semibold" : ""}>
-                    {label}
-                  </span>
-                  {isActive && (
-                    <span
-                      className={`mt-1 h-0.5 w-10 rounded-full ${
-                        darkMode ? "bg-[#6FBBFC]" : "bg-[#0065DE]"
-                      }`}
-                    />
-                  )}
+                  <span>{label}</span>
                 </button>
               );
             })}
