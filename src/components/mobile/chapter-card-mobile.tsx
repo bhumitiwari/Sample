@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -9,6 +9,9 @@ import {
   GlobeIcon,
   LightningIcon,
   CompassIcon,
+  NotePencilIcon,
+  CheckIcon,
+  XIcon,
 } from "@phosphor-icons/react";
 import { Card } from "@/components/ui/card";
 import { Chapter } from "@/types/chapter";
@@ -31,6 +34,10 @@ export const ChapterCardMobile: React.FC<ChapterCardProps> = ({
   darkMode,
 }) => {
   const { chapter: title, yearWiseQuestionCount } = chapter;
+
+  const [note, setNote] = useState<string>("");
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [tempNote, setTempNote] = useState<string>("");
 
   const years = Object.keys(yearWiseQuestionCount ?? {}).sort(
     (a, b) => Number(b) - Number(a)
@@ -64,10 +71,22 @@ export const ChapterCardMobile: React.FC<ChapterCardProps> = ({
     ? "text-[#FB484D]"
     : "text-[#E02A2F]";
 
+  const buttonColor = darkMode ? "text-[#56ACF3]" : "text-[#1E70C1]";
+
   const totalQuestions = Object.values(yearWiseQuestionCount ?? {}).reduce(
     (acc, val) => acc + val,
     0
   );
+
+  const handleNoteSave = () => {
+    setNote(tempNote);
+    setIsEditing(false);
+  };
+
+  const handleNoteCancel = () => {
+    setTempNote(note);
+    setIsEditing(false);
+  };
 
   return (
     <Card
@@ -80,7 +99,7 @@ export const ChapterCardMobile: React.FC<ChapterCardProps> = ({
             {title}
           </span>
         </div>
-        <span className={`text-[12px]  leading-none ${textMuted}`}>
+        <span className={`text-[12px] leading-none ${textMuted}`}>
           {chapter.questionSolved}/{totalQuestions} Qs
         </span>
       </div>
@@ -100,6 +119,54 @@ export const ChapterCardMobile: React.FC<ChapterCardProps> = ({
           <span className="font-medium">{secondLatestYear}:</span>{" "}
           {secondLatestCount} Qs
         </span>
+      </div>
+
+      
+      <div className="mt-2">
+        {isEditing ? (
+          <div className="flex flex-col gap-2">
+            <textarea
+              className={`w-full p-2 rounded-md text-sm border resize-none ${
+                darkMode
+                  ? "bg-[#1C2433] text-white border-[#505D79]"
+                  : "bg-white text-black border-gray-300"
+              }`}
+              rows={3}
+              value={tempNote}
+              onChange={(e) => setTempNote(e.target.value)}
+              placeholder="Write your note here..."
+            />
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={handleNoteSave}
+                className={`flex items-center gap-1 text-sm font-medium ${buttonColor}`}
+              >
+                <CheckIcon size={16} /> Save
+              </button>
+              <button
+                onClick={handleNoteCancel}
+                className={`flex items-center gap-1 text-sm font-medium ${textMuted}`}
+              >
+                <XIcon size={16} /> Cancel
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="flex justify-between items-start mt-1">
+            <p className={`text-sm ${note ? "" : "italic"} ${textMuted}`}>
+              {note || "No note added"}
+            </p>
+            <button
+              onClick={() => {
+                setTempNote(note);
+                setIsEditing(true);
+              }}
+              className={`flex items-center gap-1 text-sm font-medium ${buttonColor}`}
+            >
+              <NotePencilIcon size={16} /> {note ? "Edit Note" : "Add Note"}
+            </button>
+          </div>
+        )}
       </div>
     </Card>
   );
